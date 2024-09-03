@@ -87,10 +87,10 @@ docker logs -f [id o nombre contenedor]
 ```sh
 # Mapear puertos
 # Ejemplo => docker run  -d -p 80:5173 --name holarun 16c
-docker run -d -p [puerto anfitrion]:[puerto contendor] --name [nombre contenedor] [id imagen]
-# Para ver la aplicación ingresamo la URL
-# Eemplo => http://localhost/80:5173
-http://localhost/[puerto anfitrion]:[puerto contendor]
+docker run -d -p [puerto anfitrion]:[puerto contenedor] --name [nombre contenedor] [id imagen]
+# Para ver la aplicación ingresamos la URL
+# Ejemplo => http://localhost/80:5173
+http://localhost/[puerto anfitrion]:[puerto contenedor]
 ```
 
 ### Eliminar contenedores
@@ -103,17 +103,17 @@ docker container rm [id contenedor]
 docker container rm -f [id contenedor]
 ```
 
-### Ejecutar comandos (en el contendor)
+### Ejecutar comandos (en el contenedor)
 ```sh
 # Ejecutar comando dentro del contenedor de forma interactiva (-it) para entrar a la consola
 # Ejemplo => docker exec -it holamundo sh
 docker exec -it [nombre contenedor] [shell a usar]
-# Solo ejecutar un comando al espsifico (sin modo interactivo)
+# Solo ejecutar un comando al especifico (sin modo interactivo)
 # Ejemplo => docker exec holamundo ls
 docker exec [nombre contenedor] [comando a usar]
 ```
 
-### Volumenes
+### Volúmenes
 Se utilizan para guardar datos del contenedor
 ```sh
 # Crear volumen
@@ -121,17 +121,17 @@ docker volume create [nombre volumen]
 # Ver información del volumen
 docker volume inspect [nombre volumen]
 # Crear contenedor con volumen
-# 👁️ Ojo: la carpeta 'datos' deve estar creada desd el archivo 'Dockerfile' para que tenga los permisos de usuarios
+# 👁️ Ojo: la carpeta 'datos' debe estar creada desde el archivo 'Dockerfile' para que tenga los permisos de usuarios
 # Ejemplo => docker run -d -p 3000:3000 -v datos:/app/datos app-react:3
-docker run -d -p [puerto anfitrion]:[puerto contendor] -v [nombre volumen]:[ruta contenedor] [imagen]
+docker run -d -p [puerto anfitrion]:[puerto contenedor] -v [nombre volumen]:[ruta contenedor] [imagen]
 # Crear contenedor con nombre y volumen
 # Ejemplo => docker run -d -p 3000:3000 --name holavolumen -v datos:/app/datos app-react:4
 ```
-### Corpantiendo código
-Al crear la imagen, esta se crea del codigo actual, pero si se modifica el código local este no se modifica en la imagen. Tenido que volver a crear una nueva nueva imagen con el codigo nuevo.
+### Compartiendo código
+Al crear la imagen, esta se crea del código actual, pero si se modifica el código local este no se modifica en la imagen. Tenido que volver a crear una nueva nueva imagen con el código nuevo.
 
-- En produccion siempre hay que crear una nueva imagen.
-- Pero en desarrollo podemos usar los volumenes para actualizar los cambios
+- En producción siempre hay que crear una nueva imagen.
+- Pero en desarrollo podemos usar los volúmenes para actualizar los cambios
 
 ```sh
 # Vincular directorio con contenedor para actualizar los cambios
@@ -148,7 +148,7 @@ docker run -e CHOKIDAR_USEPOLLING=true -d -p [puerto anfitrion]:[puerto contendo
 # Ejemplo => docker cp fad3046b4f4d:/app/contenedor.txt .
 docker cp [id completo contenedor]:[ruta del archivo con su extension] [ruta de pagado en directorio local]
 
-# Copiar desde el directoriolocal al contenedor
-# Ejemplo => docker cp anfitrion.txt fad3046b4f4d:/app/
+# Copiar desde el directorio local al contenedor
+# Ejemplo => docker cp anfitrión.txt fad3046b4f4d:/app/
 docker cp [ruta del archivo con su extension] [id completo contenedor]:[ruta de pegado en el contenedor]
 ```
