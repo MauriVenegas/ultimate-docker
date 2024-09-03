@@ -1,12 +1,12 @@
 # 🐋Curso Ultimate Docker
 
-## Terminal linux
+## Terminal Linux
 
-### Ejecutando linux
+### Ejecutando Linux
 ```sh
 # run: busca imagen en local, si no esta la descarga y luego la ejecuta
 docker run ubuntu
-# Muestra imagenes
+# Muestra imágenes
 docker image ls
 # Ver los proceso (contenedores) corriendo
 docker ps
@@ -30,12 +30,12 @@ ls -l
 ls [nombre directorio]
 ```
 
-### Gestion de archivos
+### Gestión de archivos
 ```sh
 # Crear directorio
 mkdir [nombre directorio]
 # Cambiar nombre
-mv [nombre altual] [nuevo nombre]
+mv [nombre actual] [nuevo nombre]
 # Crear multiple archivos
 touch [nombre archivo] [nombre archivo 2] ...
 # Eliminar archivos
@@ -44,15 +44,15 @@ rm [nombre archivo] [nombre archivo 2] ...
 rm -r [nombre directorio]
 ```
 
-#### Busqueda de texto
+#### Búsqueda de texto
 ```sh
 # Buscar texto en un archivo
 grep [texto] [archivo]
-# Tambien se puede en multiples archivos
+# También se puede en multiples archivos
 grep [texto] [archivo1] [archivo2] ...
-# O todo los archovos con la extención .txt
+# O todo los archivos con la extensión .txt
 grep [texto] *.txt
-# No senible a mayusculas y minusculas
+# No senile a mayúsculas y minúsculas
 grep -i [texto] *.txt
 # Buscar directorios con -r
 grep -ir [texto] .
@@ -60,25 +60,25 @@ grep -ir [texto] .
 
 ### Encadenando comandos
 ```sh
-# Varios comados en una linea
+# Varios comandos en una linea
 mkdir holamundo ; cd holamundo ; echo "Listo"
-# Si uno tiene exito que se ejecute el siguiente
+# Si uno tiene éxito que se ejecute el siguiente
 mkdir holamundo && cd holamundo && echo "Listo"
 # si uno falla se ejecuta el siguiente
-mkdor holamundo || echo "Existe"
+mkdir holamundo || echo "Existe"
 ```
 
-### Varibles de entorno
+### Variables de entorno
 env: environment
 ```sh
-# Ver las varibles de entorno
+# Ver las variables de entorno
 env
 # Ver el valor de una variable
 echo $PATH
 ```
 ### Gestión de usuario
 - #: administrador
-- $: usuario comun
+- $: usuario común
 ```sh
 # Crear usuario
 useradd -m [nombre usuario]
@@ -90,16 +90,16 @@ usermod -s /bin/bash [nombre usuario]
 cat /etc/shadow
 # Cambiar de usuario, su: switch user
 su [nombre usuario]
-# Salir del usurio y cambiar al admin
+# Salir del usuario y cambiar al admin
 exit
 # Eliminar usuario (solo lo puede hacer el admin)
 userdel [nombre usuario]
-# Iniciar contenedor con un usuario en espesifico
-docker start -i [primeros digitos id]
-docker exec -it -u [nombre usuario] [primeros digitos id] bash
+# Iniciar contenedor con un usuario en especifico
+docker start -i [primeros dígitos id]
+docker exec -it -u [nombre usuario] [primeros dígitos id] bash
 ```
 
-### Gestion de grupos
+### Gestión de grupos
 ```sh
 # Ver los grupos de un usuario (al crear un usuario se le crea un grupo con su nombre de usuario)
 groups [nombre usuario]
@@ -107,21 +107,21 @@ groups [nombre usuario]
 groupadd [nombre grupo]
 # Ver grupos
 cat /etc/group
-# Agrrgar usuario a un grupo -g:forza a tener un nuevo grupo principal, -G: agrega el grupo al listado de grupos del usuario
+# Agregar usuario a un grupo -g: forzar a tener un nuevo grupo principal, -G: agrega el grupo al listado de grupos del usuario
 usermod -G [grupo] [usuario]
 ```
 
 ### Permisos
 ```sh
-# Si creamos un archivo y lo intentamos abrir nos dira que no tenemos permiso
+# Si creamos un archivo y lo intentamos abrir nos dirá que no tenemos permiso
 echo "echo hola mundo" > archivo.sh
 ./archivo.sh
 # Ver detalles de un archivo
 ls -l archivo.sh
 # -rw-r--r-- 1 root root
 # -: archivo | d: directorio
-# r: read (lectur), w: write(escritura), x: execute (ejecutar)
-# rw-:permisos del usuario | r--: permisos del rupo | r--: otros
+# r: read (lectura), w: write(escritura), x: execute (ejecutar)
+# rw-:permisos del usuario | r--: permisos del grupo | r--: otros
 # root: dueño del archivo | root: grupo del archivo
 
 # Agregar permiso de ejecución para el usuario => u: usuario, +: agregar, x: ejecutar
@@ -133,7 +133,7 @@ chmod u+x archivo.sh
 chmod g+wx archivo.sh
 # Quitar permiso de lectura, escritura y ejecución a otros
 chmod o-rwx archivo.sh
-# Tambien se puede hacer todo junto separandolo por coma (,)
+# También se puede hacer todo junto separado por coma (,)
 chmod u-w,g-wr,o+x archivo.sh
 # Asignar todos los permisos al usuario
 chmod u=rwx archivo.sh
