@@ -1,0 +1,48 @@
+# yarml es usado para archivos de configuración
+# json es usado para cominucar indfromación
+
+services:
+  app:
+    build: ./frontend
+    ports:
+      - 80:5173
+    # Volumes: actualiza los cambios echos en local en el contenedor
+    volumes:
+      # - [ubicación local]: [ubicacion contenedor]
+      - ./frontend/src:/app/src
+    environment:
+      VITE_API_URL: http://localhost:3000
+  api:
+    build: ./backend
+    ports:
+      - 3000:3000
+    environment:
+      DB_URL: mongo://db/gamify
+    volumes:
+      # - [ubicación local]: [ubicacion contenedor]
+      - ./backend/app:/app/app
+    # depends_on: para cuando un contenedor depende de otro contenedor, ejecuta primero api y despues db
+    depends_on:
+      - db
+  api-test:
+    image: node-react-app-api
+    environment:
+      DB_URL: mongo://db/gamifytest
+    volumes:
+      # - [ubicación local]: [ubicacion contenedor]
+      - ./backend/app:/app/app
+      - ./backend/tests:/app/tests
+    # depends_on: para cuando un contenedor depende de otro contenedor, ejecuta primero api y despues db
+    depends_on:
+      - db
+    # Ejecuta comando para relizar los test
+    command: npm test
+  db:
+    image: mongo:5.0.19-focal
+    ports:
+      - 27017:27017
+    volumes:
+      - gamify:/data/db
+
+volumes:
+  gamify:
